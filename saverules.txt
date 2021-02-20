@@ -1,0 +1,15 @@
+Item: 
+§ if id is number
+¶ if id is raw string
+yes iiow will laod both no matter the situation. Feel free to exploit this
+
+Property name:
+· if id is number and on top layer
+° if id is string and on top layer
+¤ if id is number and repeats for sub layers
+º if id is string and repeats for sub layers
+
+Property value:
+if number is number
+if stirng is string
+if starts with ¬ its an array that is split by ǁ and ends with ǁ
