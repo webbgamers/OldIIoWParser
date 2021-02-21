@@ -12,15 +12,15 @@ namespace IIoWParser
         public bool damaged { get; set; }
         public List<Property> properties { get; set; }
 
-        public Item(string itemId, int itemXp, int itemXpTotal, int itemXpNext, int itemTier, bool itemDamaged, List<Property> itemProperties)
+        public Item(string id, int xp, int xpTotal, int xpNext, int tier, bool damaged, List<Property> properties)
         {
-            id = itemId;
-            xp = itemXp;
-            xpTotal = itemXpTotal;
-            xpNext = itemXpNext;
-            tier = itemTier;
-            damaged = itemDamaged;
-            properties = itemProperties;
+            this.id = id;
+            this.xp = xp;
+            this.xpTotal = xpTotal;
+            this.xpNext = xpNext;
+            this.tier = tier;
+            this.damaged = damaged;
+            this.properties = properties;
         }
     }
 }
