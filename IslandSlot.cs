@@ -18,5 +18,12 @@ namespace IIoWParser
             this.block = block;
             this.attachment = attachment;
         }
+
+        public IslandSlot(Item block)
+        {
+            this.block = block;
+        }
+
+        public IslandSlot(){}
     }
 }
