@@ -13,17 +13,12 @@ namespace IIoWParser
             this.keybind = keybind;
         }
 
-        public IslandSlot(Item block, Item attachment)
+        public static IslandSlot Parse(string blockString, string attachmentString, string keybindString)
         {
-            this.block = block;
-            this.attachment = attachment;
+            Item block = Item.Parse(blockString);
+            Item attachment = Item.Parse(attachmentString);
+            
+            return new IslandSlot(block, attachment, keybindString);
         }
-
-        public IslandSlot(Item block)
-        {
-            this.block = block;
-        }
-
-        public IslandSlot(){}
     }
 }
