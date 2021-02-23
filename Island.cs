@@ -51,8 +51,10 @@ namespace IIoWParser
                 else
                 {
                     IslandSlot islandSlot = IslandSlot.Parse(inputList[i], inputList[i+1], inputList[i+2]);
-                    island[(currentSlot / 12), (currentSlot % 12)] = islandSlot;
+                    island[(currentSlot % 12), (currentSlot / 12)] = islandSlot;
                     Console.WriteLine("test");
+
+                    currentSlot++;
                     i += 3;
                 }
             }
