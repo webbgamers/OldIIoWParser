@@ -17,8 +17,12 @@ namespace IIoWParser
         {
             Item block = Item.Parse(blockString);
             Item attachment = Item.Parse(attachmentString);
+
+            string keybind = null;
+            if (keybindString != "_")
+                keybind = keybindString;
             
-            return new IslandSlot(block, attachment, keybindString);
+            return new IslandSlot(block, attachment, keybind);
         }
     }
 }
