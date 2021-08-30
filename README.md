@@ -1,4 +1,4 @@
 # IIoWParser
-Save file parser for IIslands of War
+Save file parser for IIslands of War.
 
-## This is WIP and currently does not work!
+## I did not like this and wanted to try Rust so this is moving to [iiow-parser](https://github.com/webbgamers/iiow-parser).
