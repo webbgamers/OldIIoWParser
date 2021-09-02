@@ -24,10 +24,10 @@ namespace IIoWParser
                 string printString = "";
                 for (int x = 0; x < 12; x++)
                 {
-                    if (island.island[y,x] == null)
-                        printString += " ";
+                    if (island.IslandArray[y,x] == null)
+                        printString += "   ";
                     else
-                        printString += "X";
+                        printString += " X ";
                 }
                 Console.WriteLine(printString);
             }

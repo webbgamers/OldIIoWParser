@@ -6,24 +6,24 @@ namespace IIoWParser
 {
     public class Item
     {
-        public static string[] itemNameArray = JsonSerializer.Deserialize<string[]>(File.ReadAllText("./names/items.json"));
-        public string id { get; set; }
-        public float xp { get; set; }
-        public float xpTotal { get; set; }
-        public float xpNext { get; set; }
-        public int tier { get; set; }
-        public bool damaged { get; set; }
-        public List<Property> properties { get; set; }
+        public static readonly string[] ItemNameArray = JsonSerializer.Deserialize<string[]>(File.ReadAllText("./names/items.json"));
+        public string Id { get; set; }
+        public float Xp { get; set; }
+        public float XpTotal { get; set; }
+        public float XpNext { get; set; }
+        public int Tier { get; set; }
+        public bool Damaged { get; set; }
+        public List<Property> Properties { get; set; }
 
         public Item(string id, float xp, float xpTotal, float xpNext, int tier, bool damaged, List<Property> properties)
         {
-            this.id = id;
-            this.xp = xp;
-            this.xpTotal = xpTotal;
-            this.xpNext = xpNext;
-            this.tier = tier;
-            this.damaged = damaged;
-            this.properties = properties;
+            this.Id = id;
+            this.Xp = xp;
+            this.XpTotal = xpTotal;
+            this.XpNext = xpNext;
+            this.Tier = tier;
+            this.Damaged = damaged;
+            this.Properties = properties;
         }
 
         public static Item Parse(string itemString)
@@ -37,7 +37,7 @@ namespace IIoWParser
             // ID parsing
             string id;
             if (inputList[0][0] == '§')
-                id = Item.itemNameArray[int.Parse(inputList[0].Substring(1))];
+                id = Item.ItemNameArray[int.Parse(inputList[0].Substring(1))];
             else
                 id = inputList[0].Substring(1);
 
@@ -54,10 +54,8 @@ namespace IIoWParser
             int tier = int.Parse(inputList[4]);
 
             // Damaged parsing
-            bool damaged = false;
-            if (inputList[5] == "1")
-                damaged = true;
-            
+            bool damaged = inputList[5] == "1";
+
             // Property parsing
             List<Property> properties = new List<Property>();
             for (int i = 6; i < inputList.Count; i++)

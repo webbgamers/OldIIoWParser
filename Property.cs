@@ -7,59 +7,59 @@ namespace IIoWParser
 {
     public class Property
     {
-        public static string[] itemPropNameArray = JsonSerializer.Deserialize<string[]>(File.ReadAllText("./names/item_properties.json"));
-        public static string[] projPropNameArray = JsonSerializer.Deserialize<string[]>(File.ReadAllText("./names/projectile_properties.json"));
+        public static readonly string[] ItemPropNameArray = JsonSerializer.Deserialize<string[]>(File.ReadAllText("./names/item_properties.json"));
+        public static readonly string[] ProjPropNameArray = JsonSerializer.Deserialize<string[]>(File.ReadAllText("./names/projectile_properties.json"));
         internal Property() { }
         public static Property Parse(string propertyString)
         {
-            int seperatorIndex = propertyString.IndexOf(':');
+            int separatorIndex = propertyString.IndexOf(':');
 
             // Property ID and layer
             string id = null;
             int layer = 0;
 
-            // Top layer int ID
-            if (propertyString[0] == '·')
+            switch (propertyString[0])
             {
-                id = Property.itemPropNameArray[int.Parse(propertyString.Substring(1, seperatorIndex - 1))];
-                layer = 0;
-            }
-            // Top layer string ID
-            else if (propertyString[0] == '°')
-            {
-                id = propertyString.Substring(1, seperatorIndex - 1);
-                layer = 0;
-            }
-            // Sub layer int ID
-            else if (propertyString[0] == '¤')
-            {
+                // Top layer int ID
+                case '·':
+                    id = Property.ItemPropNameArray[int.Parse(propertyString.Substring(1, separatorIndex - 1))];
+                    layer = 0;
+                    break;
+                // Top layer string ID
+                case '°':
+                    id = propertyString.Substring(1, separatorIndex - 1);
+                    layer = 0;
+                    break;
+                // Sub layer int ID
+                case '¤':
+                {
+                    for (int i = 1; i < propertyString.Length; i++)
+                    {
+                        if (propertyString[i] == '¤') continue;
+                        id = Property.ProjPropNameArray[int.Parse(propertyString.Substring(i, separatorIndex - i))];
+                        layer = i - 1;
+                        break;
+                    }
 
-                for (int i = 1; i < propertyString.Length; i++)
-                {
-                    if (propertyString[i] != '¤')
-                    {
-                        id = Property.projPropNameArray[int.Parse(propertyString.Substring(i, seperatorIndex - i))];
-                        layer = i - 1;
-                        break;
-                    }
+                    break;
                 }
-            }
-            // Sub layer string ID
-            else
-            {
-                for (int i = 1; i < propertyString.Length; i++)
+                // Sub layer string ID
+                default:
                 {
-                    if (propertyString[i] != 'º')
+                    for (int i = 1; i < propertyString.Length; i++)
                     {
-                        id = propertyString.Substring(i, seperatorIndex - i);
+                        if (propertyString[i] == 'º') continue;
+                        id = propertyString.Substring(i, separatorIndex - i);
                         layer = i - 1;
                         break;
                     }
+
+                    break;
                 }
             }
 
             // Property value
-            string stringValue = propertyString.Substring(seperatorIndex + 1);
+            string stringValue = propertyString.Substring(separatorIndex + 1);
 
             // List value
             if (stringValue[0] == '¬')
@@ -67,9 +67,9 @@ namespace IIoWParser
                 List<string> stringValueList = new List<string>(stringValue.Substring(1).Split('ǁ', StringSplitOptions.RemoveEmptyEntries));
                 List<float> floatValueList = new List<float>();
 
-                for (int i = 0; i < stringValueList.Count; i++)
+                foreach (string s in stringValueList)
                 {
-                    if (float.TryParse(stringValueList[i], out float floatValue))
+                    if (float.TryParse(s, out float floatValue))
                     {
                         floatValueList.Add(floatValue);
                     }
@@ -95,15 +95,15 @@ namespace IIoWParser
     }
     public class Property<T> : Property
     {
-        public string id { get; set; }
-        public T value { get; set; }
-        public int layer { get; set; }
+        public string Id { get; set; }
+        public T Value { get; set; }
+        public int Layer { get; set; }
 
         public Property(string id, T value, int layer)
         {
-            this.id = id;
-            this.value = value;
-            this.layer = layer;
+            this.Id = id;
+            this.Value = value;
+            this.Layer = layer;
         }
     }
 }

@@ -5,30 +5,30 @@ namespace IIoWParser
 {
     class Island
     {
-        public int coreX;
-        public int coreY;
-        public int islandWidth;
-        public int islandHeight;
-        public int islandOffsetX;
-        public int islandOffsetY;
-        public IslandSlot[,] island = new IslandSlot[12,12];
+        public int CoreX;
+        public int CoreY;
+        public int IslandWidth;
+        public int IslandHeight;
+        public int IslandOffsetX;
+        public int IslandOffsetY;
+        public readonly IslandSlot[,] IslandArray;
     
-        public Island(int coreX, int coreY, int islandWidth, int islandHeight, int islandOffsetX, int islandOffsetY, IslandSlot[,] island)
+        public Island(int coreX, int coreY, int islandWidth, int islandHeight, int islandOffsetX, int islandOffsetY, IslandSlot[,] islandArray)
         {
-            this.coreX = coreX;
-            this.coreY = coreY;
-            this.islandWidth = islandWidth;
-            this.islandHeight = islandHeight;
-            this.islandOffsetX = islandOffsetX;
-            this.islandOffsetY = islandOffsetY;
-            this.island = island;
+            this.CoreX = coreX;
+            this.CoreY = coreY;
+            this.IslandWidth = islandWidth;
+            this.IslandHeight = islandHeight;
+            this.IslandOffsetX = islandOffsetX;
+            this.IslandOffsetY = islandOffsetY;
+            this.IslandArray = islandArray;
         }
 
-        public Island(IslandSlot[,] island)
+        public Island(IslandSlot[,] islandArray)
         {
             // TODO calculate values
 
-            this.island = island;
+            this.IslandArray = islandArray;
         }
 
         public static Island Parse(string inputString)
